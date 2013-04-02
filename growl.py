@@ -179,7 +179,7 @@ def notify_highlighted_message(wbuffer, prefix, message):
         growl_notify(
             'Highlight',
             'Highligh %s %s' % (prefix, channel),
-            "{0}: {1}".format(prefix, message),
+            message,
             priority=2)
 
 
@@ -200,7 +200,7 @@ def notify_public_message_or_action(wbuffer, prefix, message, highlighted):
             growl_notify(
                 'Public',
                 '%s %s' % (prefix, channel),
-                '{0}: {1}'.format(prefix, message))
+                message)
 
 
 def notify_private_message_or_action(wbuffer, prefix, message, highlighted):
@@ -223,8 +223,8 @@ def notify_private_message_or_action(wbuffer, prefix, message, highlighted):
             elif weechat.config_get_plugin("show_private_message") == "on":
                 growl_notify(
                     'Private',
-                    'Private Message',
-                    '{0}: {1}'.format(prefix, message))
+                    '(private) %s' % (prefix),
+                    message)
 
 
 def notify_public_action_message(wbuffer, prefix, message, highlighted):
@@ -234,8 +234,8 @@ def notify_public_action_message(wbuffer, prefix, message, highlighted):
     elif weechat.config_get_plugin("show_public_action_message") == "on":
         growl_notify(
             'Action',
-            'Public Action Message',
-            '{0}: {1}'.format(prefix, message),
+            '(public action) %s' % (prefix),
+            message,
             priority=1)
 
 
@@ -246,8 +246,8 @@ def notify_private_action_message(wbuffer, prefix, message, highlighted):
     elif weechat.config_get_plugin("show_private_action_message") == "on":
         growl_notify(
             'Action',
-            'Private Action Message',
-            '{0}: {1}'.format(prefix, message),
+            '(private action) %s' % (prefix),
+            message,
             priority=1)
 
 
@@ -263,8 +263,8 @@ def notify_notice_message(wbuffer, prefix, message, highlighted):
         elif weechat.config_get_plugin("show_notice_message") == "on":
             growl_notify(
                 'Notice',
-                'Notice Message',
-                '{0}: {1}'.format(prefix, message))
+                '(notice) %s' % (prefix),
+                message)
 
 
 def notify_invite_message(wbuffer, prefix, message, highlighted):
