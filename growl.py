@@ -447,10 +447,16 @@ def main():
     name = "WeeChat"
     hostname = weechat.config_get_plugin('hostname')
     password = weechat.config_get_plugin('password')
-    icon = 'file://{0}'.format(
-        os.path.join(
-            weechat.info_get("weechat_dir", ""),
-            weechat.config_get_plugin('icon')))
+    icon_path = os.path.join(weechat.info_get("weechat_dir", ""),
+            weechat.config_get_plugin('icon'))
+    try:
+        icon = open(icon_path, "rb").read()
+    except IOError:
+        weechat.prnt('',
+                'Weechat-Growl: {0} could not be opened. '.format(icon_path) +
+                'Please make sure it exists.')
+        icon = None
+
     notifications = [
         'Public',
         'Private',
